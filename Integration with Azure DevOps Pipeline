@@ -1,0 +1,19 @@
+# azure-pipelines.yaml
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: RunSeleniumTests
+  steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '3.1.x'
+
+  - script: |
+      dotnet restore
+      dotnet test
+    displayName: 'Run Selenium Tests'
