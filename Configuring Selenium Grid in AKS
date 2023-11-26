@@ -1,0 +1,28 @@
+# selenium-grid.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: selenium-grid
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: selenium-grid
+  template:
+    metadata:
+      labels:
+        app: selenium-grid
+    spec:
+      containers:
+      - name: selenium-hub
+        image: selenium/hub:latest
+        ports:
+        - containerPort: 4444
+      - name: selenium-node-chrome
+        image: selenium/node-chrome:latest
+        ports:
+        - containerPort: 5555
+      - name: selenium-node-firefox
+        image: selenium/node-firefox:latest
+        ports:
+        - containerPort: 5556
